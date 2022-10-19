@@ -1,0 +1,16 @@
+@use '../../styles/vars' as v;
+
+.Layout {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+
+  // Tablet
+  @media (min-width: v.$tablet) {
+  }
+
+  // Lapotop
+  @media (min-width: v.$laptop) {
+  }
+}

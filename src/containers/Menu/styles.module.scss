@@ -1,0 +1,24 @@
+@use '../../styles/vars' as v;
+
+.MenuList {
+  padding: 1rem 0;
+  color: #f2f2f2;
+  width: 100%;
+
+  & li {
+    min-height: 5.6rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 0 4rem;
+    position: relative;
+
+    &:last-child {
+      border-right: v.$gold solid .4rem;
+      background: rgba(0, 0, 0, .4);
+      color: v.$light;
+    }
+  }
+
+
+}

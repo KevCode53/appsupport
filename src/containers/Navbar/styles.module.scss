@@ -1,0 +1,76 @@
+@use '../../styles/vars' as v;
+
+.navbar {
+  min-height: 5.6rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  padding: 0 2rem;
+  background: v.$ghost;
+
+  & > div {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+  }
+}
+
+.openBtn {
+  box-sizing: border-box;
+  height: 4.8rem;
+  width: 4.8rem;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  span {
+    content: '';
+    display: flex;
+    height: .3rem;
+    width: 100%;
+    border-radius: .5rem;
+    background: v.$bronce;
+  }
+
+  // Laptop
+  @media (min-width: v.$laptop) {
+    display: none;
+  }
+}
+
+.noImage {
+  // background: red;
+  background: rgba(v.$indigo, 1);
+  content: '';
+  display: block;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 100%;
+  justify-self: end;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    height: 2rem;
+    width: 4rem;
+    background: #fff;
+    position: absolute;
+    border-radius: 100%;
+    bottom: -.5rem;
+  }
+  &::before {
+    content: '';
+    height: 2rem;
+    width: 2rem;
+    background: #fff;
+    position: absolute;
+    border-radius: 100%;
+    top: .3rem;
+    left: 1rem;
+  }
+}

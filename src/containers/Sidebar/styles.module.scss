@@ -1,0 +1,140 @@
+@use '../../styles/_vars' as v;
+
+.Sidebar {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  left: -100%;
+  transition: .6s all ease;
+  z-index: 10;
+
+  & > div {
+    background: v.$indigo;
+    height: 100%;
+    max-width: 22rem;
+    position: relative;
+
+    & > header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      color: #f2f2f2;
+      height: 5.6rem;
+      background: rgba(v.$light, .2);
+    }
+  }
+
+  // Tablet
+  @media (min-width: v.$tablet) {
+    position: relative;
+    max-width: 24rem;
+    transition: none;
+    left: 0;
+
+    & > div {
+      max-width: 100%;
+    }
+  }
+
+  // Lapotop
+  @media (min-width: v.$laptop) {
+  }
+}
+
+.Open {
+  transform: translateX(100%);
+
+  // Tablet
+  @media (min-width: v.$tablet) {
+    transform: translateX(0);
+  }
+}
+
+.Layer {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  background: rgba(v.$light, .7);
+  z-index: 9;
+  opacity: 0;
+  visibility: hidden;
+  transition: .3s all ease;
+
+  // Tablet
+  @media (min-width: v.$tablet) {
+    display: none;
+  }
+}
+.Layer.isOpen {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+
+  // Tablet
+  @media (min-width: v.$tablet) {
+    display: none;
+  }
+}
+
+.UserInfo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(v.$light, .2);
+  gap: 1rem;
+  padding: 0 2rem;
+  position: relative;
+
+
+  & > picture {
+    height: 7.5rem;
+    width: 7.5rem;
+    z-index: 3;
+  }
+
+  & > h5, span {
+    color: #f2f2f2;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: normal;
+    z-index: 3;
+  }
+  & > span {
+    font-size: 1rem;
+  }
+  &::after {
+    content: '';
+    height: calc(100% - 4rem);
+    width: 100%;
+    position: absolute;
+    background: v.$indigo;
+    bottom: 0;
+  }
+}
+
+.Footer {
+  color: #f2f2f2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  justify-self: end;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 1.2rem;
+
+  & > picture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: .6rem;
+
+    & > svg {
+      width: 6rem;
+    }
+  }
+}

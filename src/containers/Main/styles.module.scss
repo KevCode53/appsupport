@@ -1,0 +1,27 @@
+@use '../../styles/vars' as v;
+
+.MainGrid {
+  padding: 0 2rem;
+  overflow-y: auto;
+
+  & > div {
+    margin-top: 5.6rem;
+  }
+
+  // Tablet
+  @media (min-width: v.$tablet) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 2.4rem;
+  }
+
+  // Laptop
+  @media (min-width: v.$tablet) {
+    padding: 0 3.2rem;
+  }
+}
+
+.mainContainer {
+
+}
