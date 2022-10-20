@@ -1,0 +1,62 @@
+@use '../../styles/vars' as v;
+
+.LoginPage {
+    width: 100vw;
+    height: 100vh;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    & > header {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 2.4rem;
+
+        & svg {
+            max-width: 36rem;
+            margin: 2.4rem auto;
+            margin-top: -10rem;
+        }
+
+        & h1 {
+            padding: .5rem;
+            letter-spacing: .5rem;
+            font-size: 3.6rem;
+            width: 30rem;
+            color: v.$white;
+            margin-bottom: 1.2rem;
+            // mix-blend-mode: multiply;
+            position: relative;
+        }
+
+        & p {
+            color: v.$white;
+            margin-bottom: .4rem;
+        }
+    }
+
+    & > form {
+        max-width: 36rem;
+        width: 100%;
+        background: #f2f2f2;
+        border-radius: 1.5rem;
+        padding: 2.4rem 0;
+        margin: 0 auto;
+        display: grid;
+        gap: 2rem;
+
+        & > div:first-child {
+            margin-top: 1.2rem;
+        }
+
+        & a {
+            text-align: center;
+            color: v.$gold;
+        }
+    }
+}
