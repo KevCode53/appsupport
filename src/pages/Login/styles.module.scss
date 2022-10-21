@@ -40,23 +40,20 @@
         }
     }
 
-    & > form {
-        max-width: 36rem;
-        width: 100%;
-        background: #f2f2f2;
-        border-radius: 1.5rem;
-        padding: 2.4rem 0;
-        margin: 0 auto;
+    // Lapotop
+    @media (min-width: v.$laptop) {
+        padding: 0;
         display: grid;
-        gap: 2rem;
+        grid-auto-flow: column;
+        grid-template-columns: 1fr minmax(30rem, 35rem);
 
-        & > div:first-child {
-            margin-top: 1.2rem;
-        }
+        & header {
+            justify-content: flex-start;
 
-        & a {
-            text-align: center;
-            color: v.$gold;
+            & svg {
+                margin-top: 10rem;
+                max-width: 50rem;
+            }
         }
     }
 }

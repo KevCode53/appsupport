@@ -1,6 +1,7 @@
 @use '../../styles/vars' as v;
 
 .PrimaryButton {
+    position: relative;
     display: flex;
     width: 100%;
     max-width: 30rem;
@@ -16,6 +17,10 @@
     font-size: 1.6rem;
     color: white;
     justify-content: center;
+
+    & span {
+        margin-right: 1.2rem;
+    }
 
     &:hover {
         background: rgba(v.$indigo, .9);
@@ -39,5 +44,11 @@
 
     &:active {
         transform: scale(.95);
+    }
+
+    &:disabled {
+        background: rgba(v.$indigo, .4);
+        opacity: .6;
+        pointer-events: none;
     }
 }

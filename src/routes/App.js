@@ -6,18 +6,21 @@ import Home from '../pages/Home'
 import Login from '../pages/Login'
 
 import {SideMenuContextProvider} from '../context/SideMenuContext'
+import { UserContextProvider } from '../context/UserContext'
 
 function App() {
   return (
     <BrowserRouter>
-      <SideMenuContextProvider>
+      <UserContextProvider>
+        <SideMenuContextProvider>
         <Layout>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
           </Routes>
         </Layout>
-      </SideMenuContextProvider>
+        </SideMenuContextProvider>
+      </UserContextProvider>
     </BrowserRouter>
   );
 }

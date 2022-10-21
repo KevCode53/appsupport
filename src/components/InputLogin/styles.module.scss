@@ -8,9 +8,10 @@
 
     & input {
         width: 100%;
-        border: solid .2rem v.$dark;
+        border: solid .2rem rgba(v.$dark, .1);
         border-radius: 1.2rem;
-        background: none;
+        background: v.$ghost;
+        color: rgba(v.$indigo, .7);
         padding: 1.6rem;
         font-size: 1.6rem;
         color: v.$light;
@@ -31,12 +32,12 @@
         outline: none;
         border: .2rem solid v.$gold;
         color: #333;
-        background: v.$ghost;
+        background: v.$white;
     }
 
     & input:focus ~ label, & input:valid ~ label {
         transform: translateY(-50%) scale(.8);
-        background-color: #f2f2f2;
+        background-color: v.$white;
         padding: 0 .2rem;
         color: v.$gold;
         border-radius: 1rem;

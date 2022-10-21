@@ -17,4 +17,8 @@
 
 .Login {
   background: v.$indigo;
+
+  // Lapotop
+  @media (min-width: v.$laptop) {
+  }
 }

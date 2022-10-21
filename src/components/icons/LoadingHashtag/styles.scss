@@ -1,0 +1,26 @@
+@use '../../../styles/vars' as v;
+
+.loader {
+    width: 3rem;
+    height: 3rem;
+    border: 7px double;
+    border-color: v.$ghost transparent;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: spin13213 2s linear infinite;
+  }
+  
+  .loader div {
+    width: 50%;
+    height: 50%;
+    background-color: v.$light;
+    border-radius: 50%;
+  }
+  
+  @keyframes spin13213 {
+    to {
+      transform: rotate(360deg);
+    }
+  }

@@ -2,11 +2,13 @@ import { useState } from 'react';
 import Styles from './styles.module.scss'
 
 import {useSideMenu} from '../../hooks/useSideMenu'
-
+import { useUser } from 'hooks/useUser';
 
 const Navbar = () => {
 
   const {isOpen, openSide} = useSideMenu()
+  const {logout} = useUser()
+
 
   console.log(isOpen)
 
@@ -22,7 +24,7 @@ const Navbar = () => {
       </button>
       <div className='navbar-menu'>
         <div>
-          <div className={Styles.noImage}></div>
+          <div onClick={logout} className={Styles.noImage}></div>
         </div>
       </div>
     </nav>
