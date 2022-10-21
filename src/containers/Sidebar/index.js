@@ -1,13 +1,22 @@
+import React from 'react'
+
 import Styles from './styles.module.scss'
 
 import {useSideMenu} from '../../hooks/useSideMenu'
 
 import Menu from '../Menu'
 
+// Import Hooks
+import { useUser } from 'hooks/useUser'
+
+
 
 const Sidebar = () => {
 
   const {isOpen, closeSide} = useSideMenu()
+  const {user} = useUser()
+
+  console.log(user)
 
   return (
     <>
@@ -44,9 +53,17 @@ const Sidebar = () => {
           {/* User Info */}
           <div className={Styles.UserInfo}>
             <picture>
-              <img src='https://cdn-icons-png.flaticon.com/512/149/149071.png'/>
+              {user !== null 
+                && user.image !== null
+                  ? (<img src={`http://127.0.0.1:8000${user.image}`}/>)
+                  : (<img src='https://cdn-icons-png.flaticon.com/512/149/149071.png'/>)
+              }
             </picture>
-            <h5>Usuario Admin Domingues Tecnico</h5>
+            <h5>{`
+              ${user !== null 
+                && user.name +' '+ user.last_name
+              }
+            `}</h5>
             <span>Técnico Informático I</span>
           </div>
 
@@ -73,4 +90,4 @@ const Sidebar = () => {
   );
 }
 
-export default Sidebar;
+export default React.memo(Sidebar);

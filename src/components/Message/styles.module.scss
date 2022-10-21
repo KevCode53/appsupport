@@ -1,0 +1,34 @@
+@use '../../styles/vars' as v;
+
+.Message {
+  position: absolute;
+  padding: 2rem;
+  width: 100%;
+  max-width: 55rem;
+  top: 1.4rem;
+  left: 0;
+  right: 0;
+  margin: auto;
+  opacity: 0;
+  visibility: hidden;
+  background: v.$light;
+  border-radius: 1rem;
+  box-shadow: .5rem .5rem 1rem rgba(v.$dark, 1);
+  transition: .3s all ease;
+}
+
+.Error {
+  background: rgb(170, 38, 28);
+  color: v.$white;
+  opacity: 1;
+  visibility: visible;
+  // animation: name duration timing-function delay iteration-count direction fill-mode;
+}
+.Success {
+  background: rgba(18, 223, 110, 0.897);
+  box-shadow: .5rem .5rem 1rem rgba(v.$dark, 1);
+  color: v.$dark;
+  opacity: 1;
+  visibility: visible;
+  // animation: name duration timing-function delay iteration-count direction fill-mode;
+}

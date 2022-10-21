@@ -17,29 +17,31 @@ import { useUser } from '../../hooks/useUser'
 
 const LoginForm = ({onSubmit}) => {
 
-    const [loading, setLoading] = useState(false)
     const [activeBtn, setActiveBtn] = useState(true)
 
     const navigate = useNavigate()
-    const {isLogged, login, isLoading, hasError, setIsLoading} = useUser()
+    const {isLogged, login, isLoading, setIsLoading} = useUser()
     const formRef = useRef()
 
+    // Is logged navigate to
     useEffect(()=> {
         if (isLogged) {
-            setTimeout(() => {
-                navigate('/')
-            }, 1000);
+            navigate('/')
         }
     }, [navigate, isLogged])
 
+
     const handleSubmit = (e) => {
-        setLoading(true)
+        setIsLoading(true)
         setActiveBtn(false)
         e.preventDefault()
         let data = new FormData(formRef.current)
         data = {"username": data.get('username'), "password": data.get('password')}
         login(data)
-        console.log(hasError)
+        setTimeout(() => {
+            setActiveBtn(true)
+            setIsLoading(false)
+        }, 2000)
     }
 
     return (
@@ -52,18 +54,18 @@ const LoginForm = ({onSubmit}) => {
                 <h3>SIREM</h3>
             </header>
             <div>
-            <InputLogin
-                    label='NIP / Usuario / Correo'
-                    name='username'
-                    type='text'
-                />
+                <InputLogin
+                        label='NIP / Usuario / Correo'
+                        name='username'
+                        type='text'
+                    />
                 <InputLogin
                     label='Contraseña'
                     name='password'
                     type='password'
                 />
                 {
-                    !isLoading
+                    isLoading
                     ? (
                         <PrimaryButton disabled={!activeBtn} text='Cargando..!' >
                             <LoadingHashtag />
@@ -74,11 +76,10 @@ const LoginForm = ({onSubmit}) => {
                             <RightArrow />
                         </PrimaryButton>
                     )
-                }
+                    }
             </div>
             <a>¿Olvidaste tu contraseña?</a>
         </form>
-
     );
 }
 

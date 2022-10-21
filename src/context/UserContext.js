@@ -7,7 +7,7 @@ export const UserContextProvider = ({children}) => {
     () => window.sessionStorage.getItem('token')
   )
   const [user, setUser] = useState(
-    () => window.sessionStorage.getItem('user')
+    () => JSON.parse(window.sessionStorage.getItem('user'))
   )
 
   return <UserContext.Provider value={{token, setToken, user, setUser}}>

@@ -1,6 +1,10 @@
 import { useLocation } from 'react-router-dom';
 
+// Import Styles
 import Styles from './styles.module.scss'
+
+// Import Components
+import Message from 'components/Message';
 
 const Layout = ({children}) => {
 
@@ -13,6 +17,7 @@ const Layout = ({children}) => {
         : Styles.Layout
         }`
       }>
+      <Message />
       {children}
     </div>
   );
