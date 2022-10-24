@@ -11,6 +11,7 @@ import { useMessages } from "./useMessages";
 export const useUser = () => {
     const {token, setToken, user, setUser} = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(false)
+    const [tokenChecking, setTokenChecking] = useState(false)
 
     const { setMessage } = useMessages()
 
@@ -53,13 +54,14 @@ export const useUser = () => {
         const response = await fetchWithToken('refresh-token/')
         const body = await response.json()
         if (response.status === 200 || response.status === 201) {
-            alert('Refresco el Token')
             const {token, user} = body
             window.localStorage.setItem('token', token)
             window.localStorage.setItem('user', JSON.stringify(user))
             setUser(user)
             setToken(token)
+            setTokenChecking(true)
         } else {
+            setTokenChecking(false)
             // throw new Error(body.error)
         }
     }
@@ -71,6 +73,7 @@ export const useUser = () => {
         isLoading,
         setIsLoading,
         user,
-        checkToken
+        checkToken,
+        tokenChecking
     }
 }

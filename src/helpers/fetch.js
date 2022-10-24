@@ -18,7 +18,7 @@ export const fetchWithoutToken = (endpoint, data, method = 'GET') => {
 export const fetchWithToken = (endpoint, data, method = 'GET') => {
 
     const url = `${API_URL}/${endpoint}`
-    const token = window.localStorage.getItem('token') || ''
+    const token = window.localStorage.getItem('token') || ' '
 
     if (!method === 'POST') {
         return fetch(url, {
@@ -26,7 +26,7 @@ export const fetchWithToken = (endpoint, data, method = 'GET') => {
             headers: {
                 "Content-Type":"application/json",
                 "Accept":"application/json",
-                "Authorization": token 
+                "Authorization": `Token ${token}`
             }
         })
     }
@@ -36,7 +36,7 @@ export const fetchWithToken = (endpoint, data, method = 'GET') => {
         headers: {
             "Content-Type":"application/json",
             "Accept":"application/json",
-            "Authorization": token 
+            "Authorization": `Token ${token}`
         },
         body: JSON.stringify(data)
     })
