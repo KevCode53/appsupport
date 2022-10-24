@@ -15,6 +15,19 @@
   src: url('../assets/fonts/Fugaz.ttf');
 }
 
+@font-face {
+  font-family: ubuntu;
+  src: url('../assets/fonts/Ubuntu/Ubuntu-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: ubuntu-bold;
+  src: url('../assets/fonts/Ubuntu/Ubuntu-Bold.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Desacticamos las animaciones en caso de que el usuario haya configurado el modo sin animaciones */
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -134,7 +147,7 @@ svg {
 body {
   min-height: 100vh;
   font-size: 1.6rem;
-  font-family: v.$fugaz;
+  font-family: v.$ubuntu;
   color: var(--white);
   background-color: v.$ghost;
 

@@ -10,6 +10,5 @@ export const logoutService = ({token}) => {
     })
         .then(res => res.json())
         .then(response => {
-            console.log(response)
         })
 }

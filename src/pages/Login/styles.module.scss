@@ -29,6 +29,7 @@
             font-size: 3.6rem;
             width: 30rem;
             color: v.$white;
+            font-family: v.$fugaz;
             margin-bottom: 1.2rem;
             // mix-blend-mode: multiply;
             position: relative;
@@ -45,7 +46,7 @@
         padding: 0;
         display: grid;
         grid-auto-flow: column;
-        grid-template-columns: 1fr minmax(30rem, 35rem);
+        grid-template-columns: 1fr minmax(35rem, 42rem);
 
         & header {
             justify-content: flex-start;

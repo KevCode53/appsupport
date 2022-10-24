@@ -1,0 +1,46 @@
+@use '../../styles/vars' as v;
+
+$info: #4592A9;
+$success: #4a934a;
+$warning: #fab515;
+$error: #ED4337;
+
+.msg-container {
+  width: calc(100vw - 4rem);
+  max-width: 60rem;
+  color: v.$white;
+  position: fixed;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 2rem;
+  background: v.$light;
+  padding: 1.4rem 2.4rem;
+  border-radius: 1rem;
+  box-shadow: .5rem .5rem 1rem #333;
+  backdrop-filter: blur(.5rem);
+
+  & h3 {
+    margin-bottom: .6rem;
+  }
+
+  &.error {
+    background: rgba($error, .7);
+  }
+
+  &.success {
+    background: rgba($success, .7);
+  }
+
+  &.warning {
+    background: rgba($warning, .7);
+  }
+
+  &.info {
+    background: rgba($info, .7);
+  }
+  // Lapotop
+  @media (min-width: v.$laptop) {
+    width: 100%;
+  }
+}

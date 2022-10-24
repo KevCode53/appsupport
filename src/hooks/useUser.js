@@ -6,21 +6,18 @@ import { fetchWithToken } from "helpers/fetch";
 
 import { UserContext } from "../context/UserContext"
 
-
 import { useMessages } from "./useMessages";
 
 export const useUser = () => {
     const {token, setToken, user, setUser} = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(false)
-    const [hasError, setHasError] = useState(false)
 
-  const { setMessage } = useMessages()
+    const { setMessage } = useMessages()
 
     const login = useCallback(({username, password}) => {
         const response = loginService({username, password})
         response.then(({body, status}) => {
-            console.log(status)
-            console.log(typeof(status))
+
             if (status === 200 || status === 201) {
                 alert('Llego a ver el token y el user')
                 const {token, user} = body
@@ -29,11 +26,17 @@ export const useUser = () => {
                 setUser(user)
                 setToken(token)
             } else {
-                alert(body.error)
-                throw new Error(body.error)
+                setMessage({
+                    show: true,
+                    type: 'error',
+                    icon: '',
+                    title: 'No se pudo Iniciar Sessión!',
+                    content: body.error
+                })
+                // throw new Error(body.error)
             }
         })
-    }, [setToken, setUser, user])
+    }, [setToken, setUser, setMessage])
 
     const logout = useCallback(({toekn}) => {
         logoutService({token})
@@ -44,7 +47,7 @@ export const useUser = () => {
         window.localStorage.removeItem('user', JSON.stringify(user))
         setToken(null)
         setUser(null)
-    }, [setToken])
+    }, [setToken, setUser, token, user])
 
     const checkToken = async () => {
         const response = await fetchWithToken('refresh-token/')
@@ -57,7 +60,7 @@ export const useUser = () => {
             setUser(user)
             setToken(token)
         } else {
-            throw new Error(body.error)
+            // throw new Error(body.error)
         }
     }
 
@@ -67,7 +70,6 @@ export const useUser = () => {
         logout,
         isLoading,
         setIsLoading,
-        hasError,
         user,
         checkToken
     }
