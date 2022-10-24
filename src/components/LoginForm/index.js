@@ -19,17 +19,8 @@ const LoginForm = ({onSubmit}) => {
 
     const [activeBtn, setActiveBtn] = useState(true)
 
-    const navigate = useNavigate()
-    const {isLogged, login, isLoading, setIsLoading} = useUser()
+    const {login, isLoading, setIsLoading} = useUser()
     const formRef = useRef()
-
-    // Is logged navigate to
-    useEffect(()=> {
-        if (isLogged) {
-            navigate('/')
-        }
-    }, [navigate, isLogged])
-
 
     const handleSubmit = (e) => {
         setIsLoading(true)

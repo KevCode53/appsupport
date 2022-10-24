@@ -2,31 +2,37 @@ import { useCallback } from "react"
 import { useState, useContext } from "react";
 import { loginService } from "services/login";
 import { logoutService } from "services/logout";
+import { fetchWithToken } from "helpers/fetch";
 
 import { UserContext } from "../context/UserContext"
 
+
+import { useMessages } from "./useMessages";
 
 export const useUser = () => {
     const {token, setToken, user, setUser} = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(false)
     const [hasError, setHasError] = useState(false)
 
+  const { setMessage } = useMessages()
+
     const login = useCallback(({username, password}) => {
-        loginService({username, password})
-            .then((res) => {
-                const {token, user} = res
-                window.sessionStorage.setItem('token', token)
-                window.sessionStorage.setItem('user', JSON.stringify(user))
+        const response = loginService({username, password})
+        response.then(({body, status}) => {
+            console.log(status)
+            console.log(typeof(status))
+            if (status === 200 || status === 201) {
+                alert('Llego a ver el token y el user')
+                const {token, user} = body
+                window.localStorage.setItem('token', token)
+                window.localStorage.setItem('user', JSON.stringify(user))
                 setUser(user)
                 setToken(token)
-                setHasError(false)
-                return user
-            })
-            .catch((err) => {
-                setHasError(true)
-                window.sessionStorage.removeItem('token')
-                window.sessionStorage.removeItem('user', JSON.stringify(user))
-            })
+            } else {
+                alert(body.error)
+                throw new Error(body.error)
+            }
+        })
     }, [setToken, setUser, user])
 
     const logout = useCallback(({toekn}) => {
@@ -34,11 +40,26 @@ export const useUser = () => {
             .then(res => {
                 // console.log(res)
             })
-        window.sessionStorage.removeItem('token')
-        window.sessionStorage.removeItem('user', JSON.stringify(user))
+        window.localStorage.removeItem('token')
+        window.localStorage.removeItem('user', JSON.stringify(user))
         setToken(null)
         setUser(null)
     }, [setToken])
+
+    const checkToken = async () => {
+        const response = await fetchWithToken('refresh-token/')
+        const body = await response.json()
+        if (response.status === 200 || response.status === 201) {
+            alert('Refresco el Token')
+            const {token, user} = body
+            window.localStorage.setItem('token', token)
+            window.localStorage.setItem('user', JSON.stringify(user))
+            setUser(user)
+            setToken(token)
+        } else {
+            throw new Error(body.error)
+        }
+    }
 
     return {
         isLogged: Boolean(token),
@@ -47,6 +68,7 @@ export const useUser = () => {
         isLoading,
         setIsLoading,
         hasError,
-        user
+        user,
+        checkToken
     }
 }

@@ -18,6 +18,10 @@
 .Login {
   background: v.$indigo;
 
+  & > div:nth-child(2) {
+    display: none;
+  }
+
   // Lapotop
   @media (min-width: v.$laptop) {
   }

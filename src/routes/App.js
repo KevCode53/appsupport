@@ -8,6 +8,7 @@ import Login from '../pages/Login'
 import {SideMenuContextProvider} from '../context/SideMenuContext'
 import { UserContextProvider } from '../context/UserContext'
 import {MessagesContextProvider} from 'context/MessagesContext' 
+import ProtectedRoute from './ProtectedRoute'
 
 function App() {
   return (
@@ -17,8 +18,11 @@ function App() {
       <SideMenuContextProvider>
         <Layout>
           <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
+            <Route exact path='/auth/login' element={<Login />} />
+            <Route exact path='/' element={
+                <ProtectedRoute><Home /></ProtectedRoute>
+              } />
+            <Route exact path='/fiscalias' element={<h1>Hola Fiscaliías</h1>} />
           </Routes>
         </Layout>
       </SideMenuContextProvider>

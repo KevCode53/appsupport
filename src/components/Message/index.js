@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Styles from './styles.module.scss'
 
 // Import Hooks
@@ -7,12 +7,19 @@ import { useMessages } from 'hooks/useMessages';
 const Message = () => {
 
   const {message, setMessage} = useMessages()
+  const [visible, setVisible] = useState(true)
 
   useEffect(() => {
     setTimeout(() => {
-      setMessage({show:false})
+      setVisible(false)
+      setMessage({
+        show:visible,
+        title: '',
+        content: '',
+        icon: ''
+      })
     }, 2000);
-  }, [setMessage])
+  }, [visible])
 
   console.log(message)
 

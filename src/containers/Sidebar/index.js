@@ -2,21 +2,17 @@ import React from 'react'
 
 import Styles from './styles.module.scss'
 
-import {useSideMenu} from '../../hooks/useSideMenu'
-
+// Import Components
 import Menu from '../Menu'
 
 // Import Hooks
+import {useSideMenu} from '../../hooks/useSideMenu'
 import { useUser } from 'hooks/useUser'
-
-
 
 const Sidebar = () => {
 
   const {isOpen, closeSide} = useSideMenu()
   const {user} = useUser()
-
-  console.log(user)
 
   return (
     <>

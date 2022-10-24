@@ -1,4 +1,5 @@
 import Styles from './styles.module.scss'
+import { useNavigate } from 'react-router-dom'
 
 // Import Components
 import LogoGold from '../../components/icons/LogoGold'
@@ -8,10 +9,20 @@ import PrimaryButton from '../../components/PrimaryButton'
 
 // Imoprt Hooks
 import { useUser } from '../../hooks/useUser'
+import { useEffect } from 'react'
 
 const Login = () => {
 
+    const navigate = useNavigate()
     const {isLogged} = useUser()
+
+
+
+    useEffect(()=>{
+        if (isLogged) {
+            navigate('/')
+        }
+    }, [navigate, isLogged])
 
     return (
         <div className={Styles.LoginPage}>

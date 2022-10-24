@@ -10,15 +10,12 @@ const Home = () => {
   const navigate = useNavigate()
   const {isLogged} = useUser()
 
-  useEffect(()=> {
-    if (!isLogged) navigate('/login')
-}, [navigate, isLogged])
+//   useEffect(()=> {
+//     if (!isLogged) navigate('/auth/login')
+// }, [navigate, isLogged])
 
   return (
-    <>
-      <Sidebar />
-      <Main />
-      </>
+    <Main />
   );
 }
 

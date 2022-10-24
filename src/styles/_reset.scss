@@ -1,5 +1,20 @@
 @use '../styles/_vars' as v;
 
+@font-face {
+  font-family: baloo;
+  src: url('../assets/fonts/Baloo.ttf');
+}
+
+@font-face {
+  font-family: telugu;
+  src: url('../assets/fonts/Telugu.ttf');
+}
+
+@font-face {
+  font-family: fugaz;
+  src: url('../assets/fonts/Fugaz.ttf');
+}
+
 /* Desacticamos las animaciones en caso de que el usuario haya configurado el modo sin animaciones */
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -119,6 +134,7 @@ svg {
 body {
   min-height: 100vh;
   font-size: 1.6rem;
+  font-family: v.$fugaz;
   color: var(--white);
   background-color: v.$ghost;
 
