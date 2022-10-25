@@ -1,0 +1,67 @@
+@use '../../styles/vars' as v;
+
+.CompromiseInfo {
+    width: 100%;
+    display: grid;
+    gap: 1.2rem;
+
+    & .title {
+
+        & h3 {
+            font-size: clamp(v.$l, 7.5vw, v.$xl);
+            font-weight: 700;
+            color: v.$indigo;
+            width: 100%;
+            padding: 0 1rem;
+            padding-bottom: 1.2rem;
+            border-bottom: .2rem solid v.$gold;
+            margin-bottom: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            }
+    }
+
+
+
+    & > .tecs {
+        width: 100%;
+        display: grid;
+        grid-auto-flow: row;
+        margin-bottom: 1.2rem;
+
+        & > h4 {
+            font-size: v.$l;
+            padding: 0 1rem;
+            padding-bottom: .6rem;
+            border-bottom: .1rem solid v.$light;
+            margin-bottom: .6rem;
+        }
+
+        & div {
+            display: flex;
+            flex-direction: column;
+            gap: .6rem;
+            font-size: v.$m;
+        }
+    }
+
+    // Laptop
+    @media (min-width: v.$laptop) {
+        grid-template-columns: 1fr 1fr;
+        column-gap: 2.2rem;
+
+        & > h3 {
+            grid-area: 1 / 1 / 1 / 3;
+        }
+        & .tecs {
+            justify-content: stretch;
+        }
+
+        & > div {
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+        }
+    }
+}

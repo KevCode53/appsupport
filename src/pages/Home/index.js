@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import Main from '../../containers/Main'
-import Sidebar from '../../containers/Sidebar'
 
 // Import Hooks
 import { useUser } from 'hooks/useUser';
-import { useEffect } from 'react';
+
+// Import Components
+import CompromiseInfo from 'components/Compromise'
 
 const Home = () => {
   const navigate = useNavigate()
@@ -15,7 +16,9 @@ const Home = () => {
 // }, [navigate, isLogged])
 
   return (
-    <Main />
+    <Main>
+      <CompromiseInfo />
+    </Main>
   );
 }
 

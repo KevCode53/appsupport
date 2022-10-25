@@ -19,6 +19,7 @@ $error: #ED4337;
   border-radius: 1rem;
   box-shadow: .5rem .5rem 1rem #333;
   backdrop-filter: blur(.5rem);
+  z-index: 100;
 
   & h3 {
     margin-bottom: .6rem;

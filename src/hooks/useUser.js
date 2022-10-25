@@ -20,8 +20,16 @@ export const useUser = () => {
         response.then(({body, status}) => {
 
             if (status === 200 || status === 201) {
-                alert('Llego a ver el token y el user')
                 const {token, user} = body
+                setMessage(
+                    {
+                        show: true,
+                        type: 'success',
+                        icon: '',
+                        title: 'Bienvenido!',
+                        content: `Se ha iniciado sesion como: ${user.username}`
+                    }
+                )
                 window.localStorage.setItem('token', token)
                 window.localStorage.setItem('user', JSON.stringify(user))
                 setUser(user)
