@@ -21,8 +21,12 @@ function App() {
             <Route exact path='/auth/login' element={<Login />} />
             <Route exact path='/' element={
                 <ProtectedRoute><Home /></ProtectedRoute>
-              } />
-            <Route exact path='/fiscalias' element={<h1>Hola Fiscaliías</h1>} />
+              } 
+            />
+            <Route exact path='/fiscalias' element={
+                <ProtectedRoute><h1>Hola Fiscaliías</h1></ProtectedRoute>
+              } 
+            />
           </Routes>
         </Layout>
       </SideMenuContextProvider>

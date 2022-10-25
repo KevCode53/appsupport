@@ -4,7 +4,10 @@ import { useUser } from "hooks/useUser";
 
 const ProtectedRoute = ({children}) => {
 
-    const {isLogged} = useUser()
+    const {checkToken, isLogged} = useUser()
+    useEffect(()=>{
+        checkToken()
+    },[])
     return isLogged ? children : <Navigate to='/auth/login' />
 }
 

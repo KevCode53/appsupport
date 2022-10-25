@@ -28,10 +28,6 @@ const Layout = ({children}) => {
 
   handleLogin()
 
-  useEffect(()=>{
-    checkToken()
-  },[checkToken])
-
   return (
     <div className={
         `${location.pathname.includes('/auth')

@@ -55,6 +55,7 @@ export const useUser = () => {
         const body = await response.json()
         if (response.status === 200 || response.status === 201) {
             const {token, user} = body
+            console.log(token)
             window.localStorage.setItem('token', token)
             window.localStorage.setItem('user', JSON.stringify(user))
             setUser(user)
