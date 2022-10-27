@@ -6,6 +6,9 @@ export const UserContextProvider = ({children}) => {
   const [token, setToken] = useState(
     () => window.localStorage.getItem('token')
   )
+  const [refreshToken, setRefreshToken] = useState(
+    () => window.localStorage.getItem('refresh-token')
+  )
   const [user, setUser] = useState(
     () => JSON.parse(window.localStorage.getItem('user'))
   )
@@ -13,7 +16,7 @@ export const UserContextProvider = ({children}) => {
     () => JSON.parse(window.localStorage.getItem('compromise'))
   )
 
-  return <UserContext.Provider value={{token, setToken, user, setUser, compromise, setCompromise}}>
+  return <UserContext.Provider value={{token, setToken, user, setUser, compromise, setCompromise, refreshToken, setRefreshToken}}>
     {children}
   </UserContext.Provider>
 }
