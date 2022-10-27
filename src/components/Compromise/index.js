@@ -1,15 +1,16 @@
 import Styles from './styles.module.scss'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
+import {useFetch} from 'hooks/useFetch'
 import {getCompromise} from 'services/getCompromise'
-import { useUser } from 'hooks/useUser';
 
 const CompromiseInfo = () => {
+  const {callFetch} = useFetch()
 
-  const [compromise, setCompromise] = useState({})
-  const {checkToken} = useUser()
-
-  console.log(compromise)
+  useEffect(() => {
+    // getCompromise().then((res) => console.log(res))
+    callFetch('get-compromise')
+  }, [])
 
   return (
     <div className={Styles.CompromiseInfo}>

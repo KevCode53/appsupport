@@ -1,79 +1,73 @@
 import { useCallback } from "react"
 import { useState, useContext } from "react";
-import { loginService } from "services/login";
-import { logoutService } from "services/logout";
+// import { logoutService } from "services/logout";
 import { fetchWithToken } from "helpers/fetch";
-
+import { loginService, logoutService } from "services/ahuthServices";
 import { UserContext } from "../context/UserContext"
 
 import { useMessages } from "./useMessages";
 
 export const useUser = () => {
     const {token, setToken, user, setUser} = useContext(UserContext)
+    const { setMessage } = useMessages()
     const [isLoading, setIsLoading] = useState(false)
     const [tokenChecking, setTokenChecking] = useState(false)
 
-    const { setMessage } = useMessages()
 
+    // Set a info of login in te storage and context
+    const setLoginData = useCallback((data) => {
+        /*
+            Get a response for login data
+            and set the storage and set the user context
+        */
+        const refreshToken = data['refresh-token']
+        const {token, user} = data
+        window.localStorage.setItem('token', token)
+        window.sessionStorage.setItem('refreshToken', refreshToken)
+        window.localStorage.setItem('user', JSON.stringify(user))
+        setUser(user)
+        setToken(token)
+
+    }, [setToken, setUser])
+
+    // Login method for user in form
     const login = useCallback(({username, password}) => {
-        const response = loginService({username, password})
-        response.then(({body, status}) => {
-
-            if (status === 200 || status === 201) {
-                const {token, user} = body
-                setMessage(
-                    {
-                        show: true,
-                        type: 'success',
-                        icon: '',
-                        title: 'Bienvenido!',
-                        content: `Se ha iniciado sesion como: ${user.username}`
-                    }
-                )
-                window.localStorage.setItem('token', token)
-                window.localStorage.setItem('user', JSON.stringify(user))
-                setUser(user)
-                setToken(token)
-            } else {
-                setMessage({
-                    show: true,
-                    type: 'error',
-                    icon: '',
-                    title: 'No se pudo Iniciar Sessión!',
-                    content: body.error
-                })
-                // throw new Error(body.error)
-            }
-        })
-    }, [setToken, setUser, setMessage])
-
-    const logout = useCallback(({toekn}) => {
-        logoutService({token})
+        console.log(isLoading)
+        setIsLoading(true)
+        loginService({username, password})
             .then(res => {
-                // console.log(res)
+                if (res.error) {
+                    setMessage({
+                        "show": true,
+                        "type": 'error',
+                        "icon": '',
+                        "title": 'Error en inicio de sessión',
+                        "content": res.error,
+                    })
+                } else {
+                    setLoginData(res)
+                }
             })
-        window.localStorage.removeItem('token')
-        window.localStorage.removeItem('user', JSON.stringify(user))
-        setToken(null)
-        setUser(null)
-    }, [setToken, setUser, token, user])
+            .finally(() => setIsLoading(false))
+    }, [isLoading, setLoginData, setMessage])
 
-    const checkToken = async () => {
-        const response = await fetchWithToken('refresh-token/')
-        const body = await response.json()
-        if (response.status === 200 || response.status === 201) {
-            const {token, user} = body
-            console.log(token)
-            window.localStorage.setItem('token', token)
-            window.localStorage.setItem('user', JSON.stringify(user))
-            setUser(user)
-            setToken(token)
-            setTokenChecking(true)
-        } else {
-            setTokenChecking(false)
-            // throw new Error(body.error)
-        }
-    }
+    // Logout method for delete credentials of the user
+    const logout = useCallback(() => {
+        const { username } = user
+        logoutService({ username })
+            .then(res => {
+                if(res.error) {
+                    throw new Error(res.error)
+                }
+                window.localStorage.removeItem('token')
+                window.localStorage.removeItem('user', JSON.stringify(user))
+                window.sessionStorage.removeItem('refreshToken', JSON.stringify(user))
+                setToken(null)
+                setUser(null)
+            })
+    }, [setToken, setUser, user])
+
+
 
     return {
         isLogged: Boolean(token),
@@ -82,7 +76,6 @@ export const useUser = () => {
         isLoading,
         setIsLoading,
         user,
-        checkToken,
         tokenChecking
     }
 }

@@ -7,7 +7,7 @@ export const UserContextProvider = ({children}) => {
     () => window.localStorage.getItem('token')
   )
   const [refreshToken, setRefreshToken] = useState(
-    () => window.localStorage.getItem('refresh-token')
+    () => window.sessionStorage.getItem('refresh-token')
   )
   const [user, setUser] = useState(
     () => JSON.parse(window.localStorage.getItem('user'))

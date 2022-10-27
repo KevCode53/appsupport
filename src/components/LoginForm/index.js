@@ -17,22 +17,15 @@ import { useUser } from '../../hooks/useUser'
 
 const LoginForm = ({onSubmit}) => {
 
-    const [activeBtn, setActiveBtn] = useState(true)
 
-    const {login, isLoading, setIsLoading} = useUser()
+    const {login, isLoading} = useUser()
     const formRef = useRef()
 
     const handleSubmit = (e) => {
-        setIsLoading(true)
-        setActiveBtn(false)
         e.preventDefault()
         let data = new FormData(formRef.current)
         data = {"username": data.get('username'), "password": data.get('password')}
         login(data)
-        setTimeout(() => {
-            setActiveBtn(true)
-            setIsLoading(false)
-        }, 2000)
     }
 
     return (
@@ -58,12 +51,12 @@ const LoginForm = ({onSubmit}) => {
                 {
                     isLoading
                     ? (
-                        <PrimaryButton disabled={!activeBtn} text='Cargando..!' >
+                        <PrimaryButton disabled={isLoading} text='Cargando..!' >
                             <LoadingHashtag />
                         </PrimaryButton>
                     )
                     :(
-                        <PrimaryButton disabled={!activeBtn} text='Iniciar Sessión' >
+                        <PrimaryButton disabled={isLoading} text='Iniciar Sessión' >
                             <RightArrow />
                         </PrimaryButton>
                     )
