@@ -5,11 +5,9 @@ import {useFetch} from 'hooks/useFetch'
 import {getCompromise} from 'services/getCompromise'
 
 const CompromiseInfo = () => {
-  const {callFetch} = useFetch()
 
   useEffect(() => {
-    // getCompromise().then((res) => console.log(res))
-    callFetch('get-compromise')
+    getCompromise().then(res => console.log(res))
   }, [])
 
   return (

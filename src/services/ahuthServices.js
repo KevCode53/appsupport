@@ -1,46 +1,41 @@
-import { fetchWithoutToken, fetchWithToken } from 'helpers/fetch'
+import { siremApi } from "api/siremApi";
+import TokenServices from "./tokenServices";
 
 // Service for create a fetch to login url
 export const loginService = async({username, password}) => {
-  return await fetchWithoutToken(
-    'login',
-    {username, password},
-    'POST'
-  )
-    .then(res => {
-      const response = res.json()
-      return response
-    })
-    .catch((err) => console.log(err.message))
+    // AXIOS
+    try {
+      const resp = await siremApi.post(`/login`, {username, password})
+      const {data} = resp
+      return data
+    } catch (error) {
+      if (error.response) {
+        // console.log(error.response.data)
+        // console.log(error.response.status)
+        // console.log(error.response.headers)
+        return error.response.data
+      } else if (error.request) {
+        // console.log({'error': 'No fue posible enviar la petición!'})
+        return {'error': 'No fue posible enviar la petición!'}
+      } else {
+        throw new Error('Error', error.message)
+      }
+    }
 }
 
-// Service for create a fetch to logout url
+// Service for create a fetch to logout
 export const logoutService = async({username}) => {
-  return await fetchWithToken(
-    'logout',
-    {username},
-    'POST'
-  )
-    .then(res => {
-      const response = res.json()
-      console.log(response)
-      return response
-    })
-    .catch((err) => console.log(err.message))
-}
-
-// Service for fetch to Refresh Token url
-export const refreshToken = async() => {
-  let refreshToken = window.sessionStorage.getItem('refreshToken')
-        ? window.sessionStorage.getItem('refreshToken')
-        : null
-  let response = await fetchWithoutToken(
-    'token/refresh',
-    {"refresh": refreshToken},
-    'POST'
-  )
-  let data = await response.json()
-  console.log('se refresco el token')
-  console.log(data)
-  return data
+  try {
+    const resp = await siremApi.post(`/logout`, {username})
+    const {data} = resp
+    return data
+  } catch (error) {
+    if (error.response) {
+      return error.response.data
+    } else if (error.request) {
+      return {'error': 'No fue posible enviar la petición!'}
+    } else {
+      throw new Error('Error', error.message)
+    }
+  }
 }

@@ -1,6 +1,6 @@
 import { useContext, useCallback } from 'react'
 import { UserContext } from "../context/UserContext"
-import {API_URL} from '../services/settings'
+import {BASE_URL} from '../services/settings'
 import { verifyToken } from '../helpers/fetch'
 import { fetchWithoutToken, fetchWithToken } from 'helpers/fetch'
 
@@ -63,7 +63,7 @@ export const useFetch = () => {
         console.info('El token sigue vigente')
     }
 
-    const url = `${API_URL}/${endpoint}`
+    const url = `${BASE_URL}/${endpoint}`
 
     headers = {
         "Content-Type":"application/json",
