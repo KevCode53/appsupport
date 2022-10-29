@@ -33,14 +33,14 @@ siremApi.interceptors.response.use(
         return res
     },
     async(error) => {
-        console.log(error.config)
+        // console.log(error.config)
         const originalConfig = error.config
 
         if (originalConfig.url !== '/auth/login' && error.response){
             if (error.response.status === 401 && !originalConfig._retry) {
                 originalConfig._retry = true
 
-                console.log('Token de acceso caducado')
+                console.info('Token de acceso caducado')
                 try {
                     const rs = await siremApi.post(
                         '/token/refresh',
@@ -49,7 +49,7 @@ siremApi.interceptors.response.use(
                     const {access, refresh} = rs.data
                     updateAccessToken(access)
                     updateRefreshToken(refresh)
-                    console.log('Se actualizaron los tokens de ["accesso", "refresh"]')
+                    console.info('Se actualizaron los tokens de ["accesso", "refresh"]')
 
                     return siremApi(originalConfig.url)
                 } catch (_error) {

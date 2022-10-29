@@ -3,7 +3,7 @@ import { siremApi } from "api/siremApi"
 export const getCompromise = async () => {
   try {
     const res = await siremApi.get('/get-compromise')
-    console.log(res)
+    // console.log(res)
     const {data} = res
       return data
   } catch (error) {
